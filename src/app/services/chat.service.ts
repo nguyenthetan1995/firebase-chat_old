@@ -26,7 +26,7 @@ export class ChatService {
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.afAuth.onAuthStateChanged((user) => {
       this.currentUser = user; 
-      debugger     
+      // debugger     
     });
   }
   async signup({ email, password }): Promise<any> {

@@ -7,3 +7,60 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+ion-content{
+    --background: #fff url('../../../assets/1.jpg') no-repeat center center / cover;
+}
+ion-item{
+    --background: #fff;
+    border-radius: 30px;
+    opacity: 65%;
+
+}
+ion-input{
+    --color : Black;
+    opacity: 65%; 
+}
+ion-button{
+    border-radius: 30px;
+    opacity: 65%;
+    width: 70%;
+    margin-left: 15% ;
+}
+
+.avata{
+    height: 100px;
+    width: 100px;
+    margin-left: 35%;
+    opacity: 65%;
+    margin-bottom: 40px;
+}
+.textbot{
+    font-style: italic;
+    font-size:larger;
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    opacity: 65%;
+    color: blue;
+}
+.nameapp{
+    font-style: italic;
+    font-size:larger;
+    font-weight: bold;
+    text-align: center;
+    font-size: 40px;
+    opacity: 65%;
+}
+.inputstyle{
+    margin-bottom: 15px;
+}
+.errors{
+    background: none;
+    color: red;
+    opacity: 65%;
+    -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+    text-align: end;
+}
+span{
+    font-size: 17px;
+}
