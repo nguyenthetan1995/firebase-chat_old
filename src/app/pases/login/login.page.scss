@@ -1,4 +1,72 @@
+// --------------------v1----------------
 
+// .errors {
+//     font-size: small;
+//     color: #fff;
+//     background: var(--ion-color-danger);
+//     padding-left: 15px;
+//     padding-top: 5px;
+//     padding-bottom: 5px;
+// }
+// ion-content{
+//     --background: #fff url('../../../assets/1.jpg') no-repeat center center / cover;
+// }
+// ion-item{
+//     --background: #fff;
+//     border-radius: 30px;
+//     opacity: 70%;
+
+// }
+// ion-input{
+//     --color : Black;
+//     opacity: 70%;
+// }
+// ion-button{
+//     border-radius: 30px;
+//     opacity: 70%;
+//     width: 70%;
+//     margin-left: 15% ;
+// }
+
+// .avata{
+//     height: 100px;
+//     width: 100px;
+//     margin-left: 35%;
+//     opacity: 70%;
+//     margin-bottom: 40px;
+// }
+// .textbot{
+//     font-style: italic;
+//     font-size:larger;
+//     font-weight: bold;
+//     text-align: center;
+//     font-size: 20px;
+//     opacity: 70%;
+//     color: blue;
+// }
+// .nameapp{
+//     font-style: italic;
+//     font-size:larger;
+//     font-weight: bold;
+//     text-align: center;
+//     font-size: 40px;
+//     opacity: 70%;
+// }
+// .inputstyle{
+//     margin-bottom: 15px;
+// }
+// .errors{
+//     background: none;
+//     color: red;
+//     opacity: 70%;
+//     -webkit-text-stroke: 0.1px rgb(0, 0, 0);
+//     text-align: end;
+// }
+// span{
+//     font-size: 17px;
+// }
+
+// --------------------------v2-----------------------
 .errors {
     font-size: small;
     color: #fff;
@@ -7,60 +75,89 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
-ion-content{
-    --background: #fff url('../../../assets/1.jpg') no-repeat center center / cover;
+ion-content {
+    --background: #fff url("../../../assets/back1a.jpg") no-repeat center center / cover;
+
 }
-ion-item{
+ion-item {
     --background: #fff;
     border-radius: 30px;
-    opacity: 65%;
-
+    opacity: 70%;
 }
-ion-input{
-    --color : Black;
-    opacity: 65%; 
+ion-input {
+    --color: Black;
+    // opacity: 70%;
 }
-ion-button{
+ion-button {
     border-radius: 30px;
-    opacity: 65%;
-    width: 70%;
-    margin-left: 15% ;
+    // opacity: 70%;
+    width: 100%;
+    margin-top: 50px;
+    // margin-left: 15%;
 }
-
-.avata{
-    height: 100px;
-    width: 100px;
-    margin-left: 35%;
-    opacity: 65%;
+.user,.pass{
+    height: 20px;
+    width: 20px;
+    opacity: 70%;
+    margin-right: 20px;
+}
+.bot{
+    display: flex;
+    justify-content:center;
+    
+}
+.iconbot{
+    height: 40px;
+    width: 40px;
+    margin: 10px;
+}
+.avata {
+    height: 80px;
+    width: 80px;
+    margin-left: 38%;
+    opacity: 70%;
     margin-bottom: 40px;
 }
-.textbot{
+.textp{
     font-style: italic;
-    font-size:larger;
+    font-size: larger;
+    font-weight: bold;
+    font-size: 14px;
+}
+.signin{
+    font-style: italic;
+    font-size: larger;
+    font-weight: bold;
+    font-size: 18px;
+    opacity: 1;
+}
+.textbot {
+    font-style: italic;
+    font-size: larger;
     font-weight: bold;
     text-align: center;
     font-size: 20px;
-    opacity: 65%;
-    color: blue;
+    opacity: 70%;
+    color: rgb(255, 255, 255);
 }
-.nameapp{
+.nameapp {
     font-style: italic;
-    font-size:larger;
+    font-size: larger;
     font-weight: bold;
     text-align: center;
     font-size: 40px;
-    opacity: 65%;
+    opacity: 70%;
 }
-.inputstyle{
+.inputstyle {
     margin-bottom: 15px;
 }
-.errors{
+.errors {
     background: none;
     color: red;
-    opacity: 65%;
+    opacity: 70%;
     -webkit-text-stroke: 0.1px rgb(0, 0, 0);
     text-align: end;
 }
-span{
+span {
     font-size: 17px;
 }
