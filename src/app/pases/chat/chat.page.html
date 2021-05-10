@@ -9,9 +9,28 @@
   </ion-toolbar>
 </ion-header>
  
-<ion-content class="ion-padding">
- 
-  <ion-grid>
+<ion-content class="ion-padding" *ngIf="!isShowChat">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{users.length}} người</ion-card-subtitle>
+      <ion-card-title>Danh sách thành viên</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item *ngFor="let item of users" (click)="clickUser(item)" >
+        <ion-avatar slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <ion-label>
+          {{item.email}}
+        </ion-label>
+      
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <ion-grid *ngIf="isShowChat">
     <ion-row *ngFor="let message of messages | async">
       <ion-col size="9" class="message"
         [offset]="message.myMsg ? 3 : 0"

@@ -53,17 +53,21 @@ export class ChatService {
     return this.afAuth.signOut();
   }
   getProfile(){
-    debugger
+  
     return this.currentUser.email;
   }
   addChatMessage(msg) {
+    
     return this.afs.collection('messages').add({
       msg: msg,
       from: this.currentUser.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
-   
+  getListUser(){
+    let users = [];
+    return this.getUsers();
+  }
   getChatMessages() {
     let users = [];
     return this.getUsers().pipe(

@@ -14,14 +14,22 @@ export class ChatPage implements OnInit {
   messages: Observable<any[]>;
   newMsg = '';
   username: string = ''
+  users: any[] =[];
+  isShowChat: boolean = false;
   constructor(private chatService: ChatService, private router: Router) { 
     
   }
  
   ngOnInit() {
+    this.chatService.getListUser().subscribe(res =>{
+      this.users = res;
+    })
+    
+  }
+  clickUser(item){
+    this.isShowChat = true;
     this.messages = this.chatService.getChatMessages();
   }
- 
   sendMessage() {
     this.chatService.addChatMessage(this.newMsg).then(() => {
       this.newMsg = '';
