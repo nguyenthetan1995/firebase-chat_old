@@ -5,7 +5,7 @@ import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angula
 // Send unauthorized users to login
 const redirectUnauthorizedToLogin = () =>
   redirectUnauthorizedTo(['/']);
- 
+
 // Automatically log in users
 const redirectLoggedInToChat = () => redirectLoggedInTo(['/chat']);
 const routes: Routes = [
@@ -19,6 +19,11 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin),
     loadChildren: () => import('./pases/chat/chat.module').then( m => m.ChatPageModule)
   },
+  {
+    path: 'message',
+    loadChildren: () => import('./pases/message/message.module').then( m => m.MessagePageModule)
+  }
+
 ];
 
 @NgModule({

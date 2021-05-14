@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 import { switchMap, map } from 'rxjs/operators';
 import { Observable,BehaviorSubject } from 'rxjs';
- 
+
 export interface User {
   uid: string;
   email: string;
@@ -21,12 +21,12 @@ export interface Message {
   providedIn: 'root'
 })
 export class ChatService {
-
+  userSelect: User
   currentUser: User = null;
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.afAuth.onAuthStateChanged((user) => {
-      this.currentUser = user; 
-      // debugger     
+      this.currentUser = user;
+      // debugger
     });
   }
   async signup({ email, password }): Promise<any> {
@@ -34,9 +34,9 @@ export class ChatService {
       email,
       password
     );
- 
+
     const uid = credential.user.uid;
- 
+
     return this.afs.doc(
       `users/${uid}`
     ).set({
@@ -44,17 +44,22 @@ export class ChatService {
       email: credential.user.email,
     })
   }
- 
+
   signIn({ email, password }) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
- 
+
   signOut(): Promise<void> {
     return this.afAuth.signOut();
   }
   getProfile(){
-    debugger
-    return this.currentUser.email;
+    return this.currentUser;
+  }
+  getListUsers(){
+    return this.getUsers();
+  }
+  userSelected(user){
+    this.userSelect = user;
   }
   addChatMessage(msg) {
     return this.afs.collection('messages').add({
@@ -63,30 +68,36 @@ export class ChatService {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
-   
+
   getChatMessages() {
     let users = [];
     return this.getUsers().pipe(
       switchMap(res => {
-        users = res;
-        return this.afs.collection('messages', ref => ref.orderBy('createdAt')).valueChanges({ idField: 'id' }) as Observable<Message[]>;
+        users.push(this.userSelect);
+        users.push({uid:this.currentUser.uid, email:this.currentUser.email });
+        return this.afs.collection('messages',(ref) =>{
+          let res = ref.where("from", "in", [this.currentUser.uid ,this.userSelect.uid])
+          return res
+        }
+        ).valueChanges({ idField: 'id' }) as Observable<Message[]>;
       }),
       map( messages => {
         // Get the real name for each user
-        for (let m of messages) {          
+        debugger
+        for (let m of messages) {
           m.fromName = this.getUserForMsg(m.from, users);
           m.myMsg = this.currentUser.uid === m.from;
-        }        
+        }
         return messages
       })
     )
   }
-   
+
   private getUsers() {
     return this.afs.collection('users').valueChanges({ idField: 'uid' }) as Observable<User[]>;
   }
-   
-  private getUserForMsg(msgFromId, users: User[]): string {    
+
+  private getUserForMsg(msgFromId, users: User[]): string {
     for (let usr of users) {
       if (usr.uid == msgFromId) {
         return usr.email;
