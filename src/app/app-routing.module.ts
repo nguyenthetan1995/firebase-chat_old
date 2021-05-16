@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'message',
     loadChildren: () => import('./pases/message/message.module').then( m => m.MessagePageModule)
+  },  {
+    path: 'photo',
+    loadChildren: () => import('./photo/photo.module').then( m => m.PhotoPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   }
+
 
 ];
 

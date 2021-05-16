@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent } from '@ionic/angular';
+import { IonContent, MenuController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ChatService } from '../../services/chat.service';
 import { Router } from '@angular/router';
@@ -16,8 +16,10 @@ export class ChatPage implements OnInit {
   username: string = '';
   users: {email:string; uid: string}[];
   currentUser: any;
-  constructor(private chatService: ChatService, private router: Router) {
-
+  constructor(private chatService: ChatService, private router: Router,
+    public menuCtrl: MenuController,
+    private menu: MenuController) {
+      // this.initializeApp();
   }
 
   ngOnInit() {
@@ -50,5 +52,21 @@ export class ChatPage implements OnInit {
   selectUser(item){
     this.chatService.userSelected(item);
     this.router.navigateByUrl('/message', { replaceUrl: true });
+  }
+  toggleMenu() {
+    this.menuCtrl.toggle(); //Add this method to your button click function
+  }
+  openFirst() {
+    this.menu.enable(true, 'first');
+    this.menu.open('first');
+  }
+
+  openEnd() {
+    this.menu.open('end');
+  }
+
+  openCustom() {
+    this.menu.enable(true, 'custom');
+    this.menu.open('custom');
   }
 }

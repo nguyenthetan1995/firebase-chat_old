@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 import { switchMap, map } from 'rxjs/operators';
-import { Observable,BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 export interface User {
   uid: string;
@@ -52,19 +52,20 @@ export class ChatService {
   signOut(): Promise<void> {
     return this.afAuth.signOut();
   }
-  getProfile(){
+  getProfile() {
     return this.currentUser;
   }
-  getListUsers(){
+  getListUsers() {
     return this.getUsers();
   }
-  userSelected(user){
+  userSelected(user) {
     this.userSelect = user;
   }
   addChatMessage(msg) {
     return this.afs.collection('messages').add({
       msg: msg,
       from: this.currentUser.uid,
+      to: this.userSelect.uid,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
@@ -72,18 +73,28 @@ export class ChatService {
   getChatMessages() {
     let users = [];
     return this.getUsers().pipe(
-      switchMap(res => {
+      switchMap((res) => {
         users.push(this.userSelect);
-        users.push({uid:this.currentUser.uid, email:this.currentUser.email });
-        return this.afs.collection('messages',(ref) =>{
-          let res = ref.where("from", "in", [this.currentUser.uid ,this.userSelect.uid])
-          return res
+        users.push({ uid: this.currentUser.uid, email: this.currentUser.email });
+        return this.afs.collection('messages', (ref) => {
+
+          var res: firebase.firestore.Query = ref;
+
+          res = res.where("from", "in", [this.currentUser.uid, this.userSelect.uid]);
+          let query2 :firebase.firestore.Query = res;
+          query2 = query2.limit(10);
+          return query2
         }
+
         ).valueChanges({ idField: 'id' }) as Observable<Message[]>;
       }),
-      map( messages => {
-        // Get the real name for each user
-        debugger
+      map(messages => {
+        // debugger
+        messages = messages.filter((mess: any) => {
+          if (mess.to == this.userSelect.uid || mess.to == this.currentUser.uid) {
+            return mess;
+          }
+        })
         for (let m of messages) {
           m.fromName = this.getUserForMsg(m.from, users);
           m.myMsg = this.currentUser.uid === m.from;

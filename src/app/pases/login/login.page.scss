@@ -79,6 +79,9 @@ ion-content {
     --background: #fff url("../../../assets/back1a.jpg") no-repeat center center / cover;
 
 }
+main{
+    padding: 0 !important;
+}
 ion-item {
     --background: #fff;
     border-radius: 30px;
@@ -147,6 +150,7 @@ ion-button {
     text-align: center;
     font-size: 40px;
     opacity: 70%;
+    color: white;
 }
 .inputstyle {
     margin-bottom: 15px;

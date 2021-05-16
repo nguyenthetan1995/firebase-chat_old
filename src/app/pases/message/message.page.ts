@@ -30,6 +30,7 @@ export class MessagePage implements OnInit {
 
     })
     this.messages = this.chatService.getChatMessages();
+    console.log(this.messages);
   }
 
   sendMessage() {
