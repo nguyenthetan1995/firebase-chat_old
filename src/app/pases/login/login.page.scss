@@ -67,18 +67,68 @@
 // }
 
 // --------------------------v2-----------------------
+.item-native,.item-interactive {
+    --border-width: 0 0 0 0 !important;
+    
+}
+.item-interactive.ion-invalid{
+    --highlight-background: none !important;
+}
 .errors {
-    font-size: small;
+    font-size: 11px;
     color: #fff;
     background: var(--ion-color-danger);
-    padding-left: 15px;
+    padding-right: 17px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-ion-content {
-    --background: #fff url("../../../assets/back1a.jpg") no-repeat center center / cover;
-
+.errors span{
+    font-size: 11px;
 }
+ion-content {
+    --background: #fff;
+}
+h1{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+.img-top{
+    height: 30%;
+    width: 100%;
+    background: url('../../../assets/background.jpg');
+    background-size: cover;
+    margin-bottom: 40px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.form{
+    padding: 10px
+}
+ion-input{
+    border-radius: 24px !important;
+    padding-right: 30px;
+    font-size: 0.9em;
+    border: 1px solid #f1f1f1 !important;
+    --background: rgb(219,219,219) !important;
+  
+    max-width: 100%; // this is applying perfectly
+    max-height: 46px;
+    padding: 4px 10px !important;
+}
+ion-input ion-img{
+    margin-left: 5px;
+    margin-right: 10px;
+}
+.inner-scroll{
+    --ion-padding: 0;
+    top: calc(var(--offset-top) * -1);
+    padding-inline-start:0; 
+    padding-inline-end:0;
+}
+ion-card{
+    --ion-margin: 0;
+} 
 ion-item {
     --background: #fff;
     border-radius: 30px;
@@ -92,8 +142,13 @@ ion-button {
     border-radius: 30px;
     // opacity: 70%;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 10px;
     // margin-left: 15%;
+}
+.action{
+    width: 100%;
+    margin-top: 0;
+    padding: 0 25px;
 }
 .user,.pass{
     height: 20px;
@@ -105,6 +160,10 @@ ion-button {
     display: flex;
     justify-content:center;
 
+
+}
+ion-button{
+    height: 46px;
 }
 .iconbot{
     height: 40px;
@@ -119,20 +178,22 @@ ion-button {
     margin-bottom: 40px;
 }
 .textp{
-    font-style: italic;
+    font-style: normal;
     font-size: larger;
     font-weight: bold;
     font-size: 14px;
+    color: rgb(0, 60, 255);
 }
 .signin{
-    font-style: italic;
+    font-style: normal;
     font-size: larger;
     font-weight: bold;
+    text-align: center;
     font-size: 18px;
     opacity: 1;
 }
 .textbot {
-    font-style: italic;
+    font-style: normal;
     font-size: larger;
     font-weight: bold;
     text-align: center;
@@ -140,12 +201,21 @@ ion-button {
     opacity: 70%;
     color: rgb(255, 255, 255);
 }
-.nameapp {
-    font-style: italic;
+.textbot span{
+    text-align: center;
+    font-style: normal;
     font-size: larger;
     font-weight: bold;
     text-align: center;
-    font-size: 40px;
+    font-size: 20px;
+    color: rgb(0, 60, 255);
+}
+.nameapp {
+    font-style: normal;
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
     opacity: 70%;
 }
 .inputstyle {
@@ -160,4 +230,8 @@ ion-button {
 }
 span {
     font-size: 17px;
+}
+ion-button{
+    --background: rgb(235, 8, 53);
+    font-weight: bold;
 }

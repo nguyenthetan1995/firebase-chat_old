@@ -29,3 +29,9 @@ div#background-content{
     background: none !important;
     opacity: 0;
 }
+.inner-scroll{
+    --ion-padding: 0;
+    top: 0 !important;
+    padding-inline-start:0 !important; 
+    padding-inline-end:0 !important;
+}
