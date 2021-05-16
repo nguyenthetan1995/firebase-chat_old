@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonContent } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { ChatService } from '../../services/chat.service';
-import { Router } from '@angular/router';
+import { ChatService } from 'src/app/services/chat.service';
+
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.page.html',
-  styleUrls: ['./chat.page.scss'],
+  selector: 'app-message',
+  templateUrl: './message.page.html',
+  styleUrls: ['./message.page.scss'],
 })
-export class ChatPage implements OnInit {
+export class MessagePage implements OnInit {
+
   @ViewChild(IonContent) content: IonContent;
 
   messages: Observable<any[]>;
@@ -25,14 +27,9 @@ export class ChatPage implements OnInit {
     this.chatService.getListUsers().pipe().subscribe((res)=>{
       this.users = []
       this.currentUser =  this.chatService.getProfile();
-      if(res.length != 0){
-        for(let user of res){
-          if(user.uid !==  this.currentUser.uid){
-            this.users.push(user);
-          }
-        }
-      }
+
     })
+    this.messages = this.chatService.getChatMessages();
   }
 
   sendMessage() {
@@ -42,13 +39,8 @@ export class ChatPage implements OnInit {
     });
   }
 
-  signOut() {
-    this.chatService.signOut().then(() => {
-      this.router.navigateByUrl('/', { replaceUrl: true });
-    });
+  back() {
+    this.router.navigateByUrl('/chat', { replaceUrl: true });
   }
-  selectUser(item){
-    this.chatService.userSelected(item);
-    this.router.navigateByUrl('/message', { replaceUrl: true });
-  }
+
 }

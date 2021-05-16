@@ -1,9 +1,6 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Devdactic Chat</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-<ion-content class="ion-padding background">
+<!-- // --------------------------v1------------------ -->
+
+<!-- <ion-content class="ion-padding background">
   <h1 class="nameapp">Wellcom Mess Sit</h1>
   <ion-img class="avata" src="../../../assets/icon/user.png"></ion-img>
   <form [formGroup]="credentialForm">
@@ -33,4 +30,51 @@
   <ion-button (click)="signUp()" expand="block" shape="round">Sing up</ion-button>
   <ion-button (click)="signIn()" expand="block" shape="round" color="secondary">Sing in</ion-button>
   <h1 class="textbot">-------- OR CONNECT WITH --------</h1>
+</ion-content> -->
+
+
+<!-- ------------------------v2----------------------- -->
+
+<ion-content class="ion-padding background">
+  <h1 class="nameapp">Wellcom Mess Sit</h1>
+  <ion-img class="avata" src="../../../assets/icon/messenger.svg"></ion-img>
+  <form [formGroup]="credentialForm">
+    <div class="inputstyle">
+      <ion-item>
+        <ion-input placeholder="Email address" formControlName="email" autofocus="true" clearInput="true">
+          <ion-img class="user" src="../../../assets/icon/user.svg"></ion-img>
+        </ion-input>
+      </ion-item>
+      <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+        <span *ngIf="email.errors?.required">Email is required</span>
+        <span *ngIf="email.errors?.email">Email is invalid</span>
+      </div>
+    </div>
+
+    <div class="inputstyle">
+      <ion-item>
+        <ion-input placeholder="Password" type="password" formControlName="password" clearInput="true">
+          <ion-img class="pass" src="../../../assets/icon/padlock.svg"></ion-img>
+        </ion-input>
+      </ion-item>
+      <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Password is required</span>
+        <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+      </div>
+    </div>
+  </form>
+
+
+
+  <!-- <ion-button (click)="signUp()" expand="block" shape="round">Sing up</ion-button> -->
+  <ion-button (click)="signIn()" expand="block" shape="round" color="secondary">Sing in</ion-button>
+  <h1 class="textbot">-------- OR CONNECT WITH --------</h1>
+  <div class="bot">
+    <ion-img class="iconbot" src="../../../assets/icon/google-plus.svg"></ion-img>
+    <ion-img class="iconbot" src="../../../assets/icon/facebook.svg"></ion-img>
+  </div>
+  <div class="textbot">
+    <p class="textp">Have no accounts? <a class="signin">Sign up</a></p>
+  </div>
+
 </ion-content>

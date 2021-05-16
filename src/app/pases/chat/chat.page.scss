@@ -1,32 +1,18 @@
-.message-input {
-    width: 100%;
-    border: 1px solid var(--ion-color-medium);
-    border-radius: 6px;
-    background: #fff;
-    resize: none;
-    margin-top: 0px;
-    --padding-start: 8px;
+
+ion-label{
+  margin-left: 1rem;
 }
- 
-.message {
-    padding: 10px !important;
-    border-radius: 10px !important;
-    margin-bottom: 4px !important;
-    white-space: pre-wrap;
+ion-toolbar ion-avatar,ion-toolbar{
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-items: center;
 }
- 
-.my-message {
-    background: var(--ion-color-tertiary);
-    color: #fff;
+ion-avatar img{
+  width: 50%;
+  height: 50%;
+  margin-left: 10px;
 }
- 
-.other-message {
-    background: var(--ion-color-secondary);
-    color: #fff;
-}
- 
-.time {
-    color: #dfdfdf;
-    float: right;
-    font-size: small;
+ion-title{
+  margin-top: 20px;
 }
