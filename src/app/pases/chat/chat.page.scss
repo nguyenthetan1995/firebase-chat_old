@@ -2,20 +2,17 @@
 ion-label{
   margin-left: 1rem;
 }
-.my-custom-menu {
-  --width: 500px;
-}
-.iconmenu{
-  height: 40px;
-  width: 40px;
-}
-img{
-  height: 30px;
-  width: 30px;
-  
-}
-ion-avatar{
+ion-toolbar ion-avatar,ion-toolbar{
+  float: left;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
+}
+ion-avatar img{
+  width: 50%;
+  height: 50%;
+  margin-left: 10px;
+}
+ion-title{
+  margin-top: 20px;
 }

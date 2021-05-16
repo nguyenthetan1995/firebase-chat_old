@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
-import { switchMap, map } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { Observable,BehaviorSubject } from 'rxjs';
 
 export interface User {
   uid: string;
@@ -29,6 +29,8 @@ export class ChatService {
       // debugger
     });
   }
+  Filter1$: BehaviorSubject<string|null>;
+  Filter2$: BehaviorSubject<string|null>;
   async signup({ email, password }): Promise<any> {
     const credential = await this.afAuth.createUserWithEmailAndPassword(
       email,
@@ -62,6 +64,7 @@ export class ChatService {
     this.userSelect = user;
   }
   addChatMessage(msg) {
+    
     return this.afs.collection('messages').add({
       msg: msg,
       from: this.currentUser.uid,
@@ -69,32 +72,32 @@ export class ChatService {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
-
   getChatMessages() {
     let users = [];
+    var db = firebase.firestore();
+    
     return this.getUsers().pipe(
       switchMap((res) => {
         users.push(this.userSelect);
-        users.push({ uid: this.currentUser.uid, email: this.currentUser.email });
-        return this.afs.collection('messages', (ref) => {
+        users.push({uid:this.currentUser.uid, email:this.currentUser.email });
+        var a = res;
 
-          var res: firebase.firestore.Query = ref;
-
-          res = res.where("from", "in", [this.currentUser.uid, this.userSelect.uid]);
-          let query2 :firebase.firestore.Query = res;
-          query2 = query2.limit(10);
-          return query2
+        return this.afs.collection('messages',(ref) =>{
+            let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+            query = query.where('from', 'in', [this.currentUser.uid,this.userSelect.uid] ) ;
+            let query2 : firebase.firestore.CollectionReference | firebase.firestore.Query =query
+            query2 = query2.limit(30);
+            return query2;
         }
-
-        ).valueChanges({ idField: 'id' }) as Observable<Message[]>;
+        ).valueChanges() as Observable<Message[]>;
       }),
-      map(messages => {
-        // debugger
-        messages = messages.filter((mess: any) => {
-          if (mess.to == this.userSelect.uid || mess.to == this.currentUser.uid) {
+      map( messages => {
+        // Get the real name for each user
+        messages = messages.filter((mess:any) =>{
+          if(mess.to === this.userSelect.uid || mess.to === this.currentUser.uid){
             return mess;
           }
-        })
+        });
         for (let m of messages) {
           m.fromName = this.getUserForMsg(m.from, users);
           m.myMsg = this.currentUser.uid === m.from;
@@ -107,7 +110,6 @@ export class ChatService {
   private getUsers() {
     return this.afs.collection('users').valueChanges({ idField: 'uid' }) as Observable<User[]>;
   }
-
   private getUserForMsg(msgFromId, users: User[]): string {
     for (let usr of users) {
       if (usr.uid == msgFromId) {
